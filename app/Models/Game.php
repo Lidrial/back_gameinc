@@ -15,4 +15,9 @@ class Game extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
