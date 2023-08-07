@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('description', 1000);
             $table->foreignId('company_id')->constrained('companies');
             $table->string('image', 1000);
-            $table->float('average_rate', 100, 2);
+            $table->string('link', 100);
+            $table->float('average_rate', 100, 2)->nullable();
             $table->timestamps();
         });
     }

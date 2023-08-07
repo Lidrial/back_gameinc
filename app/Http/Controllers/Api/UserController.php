@@ -47,7 +47,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $updateUserRequest, string $id)
     {
         //
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         if (!$user) {
             // User with the given ID not found
             return response()->json(['message' => 'Profil inexistant'], 404);

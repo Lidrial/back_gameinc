@@ -62,7 +62,6 @@ class StoreUserRequest extends FormRequest
             'password.confirmed' => 'Le mot de passe doit être confirmé',
             'company_id.integer' => 'L\'entreprise doit être un entier',
             'company_id.exists' => 'L\'entreprise doit exister',
-
         ];
     }
 
