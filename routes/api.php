@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\UserController;
@@ -27,3 +28,7 @@ Route::apiResource('/users', UserController::class);
 Route::apiResource('/games', GameController::class);
 
 Route::apiResource('comments', CommentController::class);
+
+Route::apiResource('category', CategoryController::class);
+
+Route::get('/categories/{game}/games', [GameController::class, 'indexByCategory']);

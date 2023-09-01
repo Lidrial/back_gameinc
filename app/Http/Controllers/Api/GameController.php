@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\StoreGameRequest;
 use App\Http\Requests\Game\UpdateGameRequest;
+use App\Models\Category;
 use App\Models\Game;
 use Illuminate\Http\Request;
 
@@ -126,5 +127,18 @@ class GameController extends Controller
         // Now you can safely delete the game
         $game->delete();
         return response()->json(['message' => 'Jeu supprimé avec succès'], 200);
+    }
+
+    public function indexByCategory(Category $category, string $id)
+    {
+        //
+        try {
+            //get game by category
+            $games = $category->findOrFail($id)->games()->with('categories:id')->get();
+            return response()->json(['games' => $games]);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Categories not found!'], 404);
+        }
     }
 }
