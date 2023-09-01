@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/users', UserController::class);
 
 Route::apiResource('/games', GameController::class);
+
+Route::apiResource('comments', CommentController::class);
