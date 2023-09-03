@@ -27,6 +27,7 @@ class UpdateUserRequest extends FormRequest
             //
             'first_name' => 'bail|string|max:255',
             'last_name' => 'bail|string|max:255',
+            'pseudo' => 'bail|string|max:255|unique:users,pseudo',
             'role_id' => 'bail|integer|exists:roles,id',
             'email' => 'bail|string|email|max:255|unique:users,email',
             'password' => 'bail|string|min:8|confirmed',
@@ -47,6 +48,9 @@ class UpdateUserRequest extends FormRequest
             'first_name.max' => 'Le prénom ne doit pas dépasser 255 caractères',
             'last_name.string' => 'Le nom doit être une chaîne de caractères',
             'last_name.max' => 'Le nom ne doit pas dépasser 255 caractères',
+            'pseudo.string' => 'Le pseudo doit être une chaîne de caractères',
+            'pseudo.unique' => 'Ce pseudo est déjà utilisé',
+            'pseudo.max' => 'Le pseudo ne doit pas dépasser 255 caractères',
             'role_id.integer' => 'Le rôle doit être un entier',
             'role_id.exists' => 'Le rôle doit exister',
             'email.string' => 'L\'email doit être une chaîne de caractères',

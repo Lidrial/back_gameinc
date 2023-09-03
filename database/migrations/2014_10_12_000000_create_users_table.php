@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('pseudo');
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('role_id')->constrained('roles');
             $table->string('email')->unique();
