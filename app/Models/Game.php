@@ -17,6 +17,7 @@ class Game extends Model
         'company_id',
         'image',
         'link',
+        'game',
     ];
 
     public function categories(): BelongsToMany

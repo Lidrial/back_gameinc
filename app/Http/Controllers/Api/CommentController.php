@@ -27,7 +27,7 @@ class CommentController extends Controller
         $comment = Comment::create($validatedData);
 //        dd($comment);
 
-        return response()->json($comment, 201);
+        return response()->json(['message' => 'Commentaire créé'], 201);
     }
 
     /**
@@ -70,5 +70,11 @@ class CommentController extends Controller
         }
 
         return response()->json(['message' => 'Commentaire supprimé'], 200);
+    }
+
+    public function getCommentsByGameId(string $game)
+    {
+        $comments = Comment::where('game_id', $game)->get();
+        return response()->json($comments, 200);
     }
 }

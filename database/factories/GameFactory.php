@@ -22,6 +22,7 @@ class GameFactory extends Factory
              'description' => $this->faker->text(),
              'image' => $this->faker->url(),
              'link' => $this->faker->url(),
+             'path' => 'public/games/flappybird.js',
              'average_rate' => $this->faker->randomFloat(2, 0, 5),
          ];
     }
