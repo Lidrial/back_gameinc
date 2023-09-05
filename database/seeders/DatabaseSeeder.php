@@ -38,6 +38,16 @@ class DatabaseSeeder extends Seeder
              $game->users()->attach(array_slice($ids, 0, rand(1, 3)));
          });
 
+         //create one admin
+        User::factory()->create([
+            'first_name' => 'admin',
+            'last_name' => 'admin',
+            'pseudo' => 'admin',
+            'company_id' => 1,
+            'role_id' => 1,
+            'email' => 'admin@admin.fr',
+            'password' => bcrypt('admin'),
+        ]);
 
     }
 }
