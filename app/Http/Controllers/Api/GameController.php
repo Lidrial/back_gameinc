@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\Game;
 use Illuminate\Http\Request;
 
+//q: how can i write a test for this controller
+//a: https://laravel.com/docs/8.x/http-tests#testing-json-apis
+
 class GameController extends Controller
 {
     /**

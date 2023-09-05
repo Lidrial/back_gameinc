@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return response()->json(['message' => 'Api fonctionnelle']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class);

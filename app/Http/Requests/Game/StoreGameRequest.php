@@ -30,7 +30,7 @@ class StoreGameRequest extends FormRequest
             'company_id' => 'bail|required|integer|exists:companies,id',
             'image' => 'bail|required|string|max:255',
             'link' => 'bail|required|string|max:255',
-            'file' => 'bail|required|file|mimes:js',
+            'file' => 'bail|file|mimes:js',
             'category_id' => 'bail|required|array',
             'category_id.*' => 'integer|exists:categories,id',
             'user_id' => 'bail|required|array',
