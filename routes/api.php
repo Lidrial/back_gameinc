@@ -25,8 +25,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/games', GameController::class);
 
     Route::apiResource('comments', CommentController::class);
+    Route::get('game/comments/{game}', [CommentController::class, 'getCommentsByGameId']);
 
     Route::apiResource('category', CategoryController::class);
+
+    Route::get('get_games/{id}', [GameController::class, 'getGameFile']);
 
     Route::get('/categories/{game}/games', [GameController::class, 'indexByCategory']);
 
@@ -34,9 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
 
 

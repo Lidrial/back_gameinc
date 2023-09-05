@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image', 1000);
             $table->string('link', 100);
             $table->float('average_rate', 100, 2)->nullable();
+            $table->string('path', 1000)->nullable();
             $table->timestamps();
         });
     }

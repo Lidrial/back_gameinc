@@ -47,10 +47,13 @@ class GameController extends Controller
     {
         //
         $validatedData = $storeGameRequest->validated();
+        $gamePath = $storeGameRequest->file('game')->store('public/games');
         $game = Game::create($validatedData);
 
         $categories_ids = $validatedData['category_id'];
         $users_ids = $validatedData['user_id'];
+
+        $game->path = $gamePath;
 
         $game->categories()->attach($categories_ids);
         $game->users()->attach($users_ids);
@@ -140,5 +143,12 @@ class GameController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Categories not found!'], 404);
         }
+    }
+
+    public function getGameFile(string $id)
+    {
+        $game = Game::findOrFail($id);
+        $path = storage_path('app/' . $game->path);
+        return response()->download($path);
     }
 }

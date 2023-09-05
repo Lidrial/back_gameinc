@@ -26,6 +26,7 @@ class StoreUserRequest extends FormRequest
         return [
             'first_name' => 'bail|required|string|max:255',
             'last_name' => 'bail|required|string|max:255',
+            'pseudo' => 'bail|string|max:255|unique:users,pseudo',
             'role_id' => 'bail|required|integer|exists:roles,id',
             'email' => 'bail|required|string|email|max:255|unique:users,email',
             'password' => 'bail|required|string|min:8|confirmed',
@@ -48,6 +49,9 @@ class StoreUserRequest extends FormRequest
             'last_name.required' => 'Le nom est requis',
             'last_name.string' => 'Le nom doit être une chaîne de caractères',
             'last_name.max' => 'Le nom ne doit pas dépasser 255 caractères',
+            'pseudo.string' => 'Le pseudo doit être une chaîne de caractères',
+            'pseudo.unique' => 'Ce pseudo est déjà utilisé',
+            'pseudo.max' => 'Le pseudo ne doit pas dépasser 255 caractères',
             'role_id.required' => 'Le rôle est requis',
             'role_id.integer' => 'Le rôle doit être un entier',
             'role_id.exists' => 'Le rôle doit exister',
