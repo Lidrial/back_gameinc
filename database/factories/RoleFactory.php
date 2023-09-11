@@ -26,7 +26,6 @@ class RoleFactory extends Factory
         return [
             'name' => array_shift($roles),
         ];
-
         //permet de créer des roles différents
     }
 }

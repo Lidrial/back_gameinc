@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -22,12 +23,15 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $storeCommentRequest)
     {
+        try{
+            $validatedData = $storeCommentRequest->validated();
+            $comment = Comment::create($validatedData);
 
-        $validatedData = $storeCommentRequest->validated();
-        $comment = Comment::create($validatedData);
-//        dd($comment);
+            return response()->json(['message' => 'Commentaire créé', 'commentaire' => $comment], 201);
 
-        return response()->json(['message' => 'Commentaire créé'], 201);
+        }catch(\Exception $e){
+            return response()->json(['message' => 'Erreur lors de la création du commentaire'], 500);
+        }
     }
 
     /**
@@ -75,6 +79,13 @@ class CommentController extends Controller
     public function getCommentsByGameId(string $game)
     {
         $comments = Comment::where('game_id', $game)->get();
+//        dd($comments);
+        foreach ($comments as $comment) {
+            //only store pseudo user
+            // $comment['user'] = User::where('id', $comment['user_id'])->get();
+            $comment['user'] = User::where('id', $comment['user_id'])->select('pseudo')->first();
+        }
+//        $comments['user'] = User::where('id', $comments['user_id'])->get();
         return response()->json($comments, 200);
     }
 }
