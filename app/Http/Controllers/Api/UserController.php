@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,11 +22,14 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $storeUserRequest)
     {
         //
 //        dd($request->all());
-        return User::create($request->all());
+        $validatedData = $storeUserRequest->validated();
+        $user = User::create($validatedData);
+
+        return response()->json($user, 201);
     }
 
     /**
@@ -39,16 +44,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $updateUserRequest, string $id)
     {
         //
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         if (!$user) {
             // User with the given ID not found
             return response()->json(['message' => 'Profil inexistant'], 404);
         }
 
-        $user->update($request->all());
+        $user->update($updateUserRequest->all());
 
         // User profile successfully updated
         return response()->json(['message' => 'Profil mis à jour'], 200);
@@ -60,6 +65,13 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-        return User::destroy($id);
+        $user = User::destroy($id);
+        if (!$user) {
+            // User with the given ID not found
+            return response()->json(['message' => 'Profil inexistant'], 404);
+        }
+
+        // User profile successfully deleted
+        return response()->json(['message' => 'Profil supprimé'], 200);
     }
 }
